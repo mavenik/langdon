@@ -1,5 +1,5 @@
 import React from 'react';
-import {Responsive, Container} from 'semantic-ui-react';
+import {Responsive} from 'semantic-ui-react';
 import NavMenu from './NavMenu';
 import NavSidebar from './NavSidebar';
 import Footer from './Footer';

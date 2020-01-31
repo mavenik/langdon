@@ -6,8 +6,8 @@ import NavSidebar from './NavSidebar';
 
 export const items = [
     {content: 'Home', to: '/home'},
-    {content: 'Home', to: '/home'},
-    {content: 'Home', to: '/home'},
+    {content: 'Vulcan', to: '/vulcan'},
+    {content: 'Earth', to: '/earth'},
     {content: 'About Us', to: '/about'}
   ]
 
