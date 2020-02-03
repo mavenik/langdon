@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Menu, Image} from 'semantic-ui-react';
+import {Menu} from 'semantic-ui-react';
+import UserDropdown from './UserDropdown';
 
 export default function NavMenu(props) {
   const [activeItem, setActiveItem] = useState(null);
@@ -9,9 +10,15 @@ export default function NavMenu(props) {
 
   var userButton;
   if(props.user) {
-    userButton = <Image src={props.user.profilePictureUrl} avatar/>
+    userButton = <Menu.Item position='right'>
+      <UserDropdown user={props.user} handleSignOut={props.handleSignOut}/>
+    </Menu.Item>
   } else {
-    userButton = 'Sign In'
+    userButton = <Menu.Item as={Link} position='right' to='#'
+      onClick={props.handleSignIn}
+    >
+      Sign In
+    </Menu.Item>
   }
 
   return (
@@ -19,11 +26,11 @@ export default function NavMenu(props) {
       {props.items.map( item => <Menu.Item 
         {...item}
         name={item.content.toLowerCase().replace(/\s+/g,'-')}
+        key={item.content.toLowerCase().replace(/\s+/g,'-')}
         onClick={handleItemClick} as={Link} 
-        active={activeItem === item.content.toLowerCase().replace(/\s+/g,'-')} />)}
-      <Menu.Item as={Link} position='right'>
+        active={activeItem === item.content.toLowerCase().replace(/\s+/g,'-')}
+      />)}
         {userButton}
-      </Menu.Item>
     </Menu>
   )
 }

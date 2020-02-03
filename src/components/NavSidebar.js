@@ -10,9 +10,18 @@ export default function NavSidebar(props) {
 
   var userButton;
   if(props.user) {
-    userButton = <Image src={props.user.profilePictureUrl} avatar/>
+    userButton = <Menu.Item as={Link} position='right' to="#">
+      <Image src={props.user.profilePictureUrl} avatar/>
+    </Menu.Item>
   } else {
-    userButton = 'Sign In'
+    userButton = <Menu.Item 
+      as={Link} 
+      position='right' 
+      to="#"
+      onClick={props.handleSignIn}
+    >
+      Sign In
+    </Menu.Item>
   }
 
   return (
@@ -31,9 +40,7 @@ export default function NavSidebar(props) {
           visible={sidebarVisible}
           style={{height: '100vh !important'}}
         >
-          <Menu.Item as={Link} position='right'>
-            {userButton}
-          </Menu.Item>
+          {userButton}
           {props.items.map( item => <Menu.Item 
             {...item}
             name={item.content.toLowerCase().replace(/\s+/g,'-')}
@@ -41,13 +48,13 @@ export default function NavSidebar(props) {
             as={Link}
             active={activeItem === item.content.toLowerCase().replace(/\s+/g,'-')} />
           )}
-        </Sidebar>
+      </Sidebar>
         <Sidebar.Pusher>
           <Segment basic>
             {props.children}
           </Segment>
         </Sidebar.Pusher>
-      </Sidebar.Pushable>
+    </Sidebar.Pushable>
     </div>
   )
 }

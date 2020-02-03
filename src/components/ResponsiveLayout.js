@@ -13,7 +13,12 @@ const getWidth = () => {
 const DesktopLayout = (props) => {
   return (
     <>
-      <NavMenu items={props.menuItems} user={props.user} />
+      <NavMenu 
+        items={props.menuItems} 
+        user={props.user} 
+        handleSignIn={props.handleSignIn}
+        handleSignOut={props.handleSignOut}
+      />
       <Container>
         {props.children}
       </Container>
@@ -25,12 +30,17 @@ const DesktopLayout = (props) => {
 const MobileLayout = (props) => {
   return (
     <>
-      <NavSidebar items={props.menuItems} user={props.user}>
+      <NavSidebar 
+        items={props.menuItems} 
+        user={props.user}
+        handleSignIn={props.handleSignIn}
+        handleSignOut={props.handleSignOut}
+      >
         <Container>
           {props.children}
         </Container>
       </NavSidebar>
-        <Footer/>
+      <Footer/>
     </>
   )
 }
@@ -39,13 +49,23 @@ export default function ResponsiveLayout(props){
   return (
     <>
       <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth}>
-        <MobileLayout menuItems={props.menuItems} user={props.user}>
+        <MobileLayout 
+          menuItems={props.menuItems} 
+          user={props.user}
+          handleSignIn={props.handleSignIn}
+          handleSignOut={props.handleSignOut}
+        >
           {props.children}
         </MobileLayout>
       </Responsive>
 
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <DesktopLayout menuItems={props.menuItems} user={props.user}>
+        <DesktopLayout 
+          menuItems={props.menuItems} 
+          user={props.user}
+          handleSignIn={props.handleSignIn}
+          handleSignOut={props.handleSignOut}
+        >
           {props.children}
         </DesktopLayout>
       </Responsive>

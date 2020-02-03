@@ -3,7 +3,7 @@ import {
     INITIAL_VIEWPORTS
 } from '@storybook/addon-viewport';
 
-import '../semantic/dist/semantic.css';
+import '../src/semantic/dist/semantic.css';
 import requireContext from 'require-context.macro';
 
 // automatically import all files ending in *.stories.js
