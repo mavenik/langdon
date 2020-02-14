@@ -1,28 +1,13 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Sidebar, Button, Icon, Segment, Menu, Image} from 'semantic-ui-react';
+import {userContext} from '../userContext';
 
 export default function NavSidebar(props) {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
 
   const handleItemClick = (event, { name }) => setActiveItem(name)
-
-  var userButton;
-  if(props.user) {
-    userButton = <Menu.Item as={Link} position='right' to="#">
-      <Image src={props.user.profilePictureUrl} avatar/>
-    </Menu.Item>
-  } else {
-    userButton = <Menu.Item 
-      as={Link} 
-      position='right' 
-      to="#"
-      onClick={props.handleSignIn}
-    >
-      Sign In
-    </Menu.Item>
-  }
 
   return (
     <div>
@@ -40,7 +25,26 @@ export default function NavSidebar(props) {
           visible={sidebarVisible}
           style={{height: '100vh !important'}}
         >
-          {userButton}
+          <userContext.Consumer>
+            {(user) => {
+              if(user)
+              {
+                return <Menu.Item as={Link} position='right' to="#">
+                  <Image src={props.user.profilePictureUrl} avatar/>
+                </Menu.Item>
+
+              } else {
+                return <Menu.Item 
+                  as={Link} 
+                  position='right' 
+                  to="#"
+                  onClick={props.handleSignIn}
+                >
+                  Sign In
+                </Menu.Item>
+              } // else
+            }}
+          </userContext.Consumer>
           {props.items.map( item => <Menu.Item 
             {...item}
             name={item.content.toLowerCase().replace(/\s+/g,'-')}
@@ -48,13 +52,13 @@ export default function NavSidebar(props) {
             as={Link}
             active={activeItem === item.content.toLowerCase().replace(/\s+/g,'-')} />
           )}
-      </Sidebar>
+        </Sidebar>
         <Sidebar.Pusher>
           <Segment basic>
             {props.children}
           </Segment>
         </Sidebar.Pusher>
-    </Sidebar.Pushable>
+      </Sidebar.Pushable>
     </div>
   )
 }

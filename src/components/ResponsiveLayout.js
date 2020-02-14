@@ -15,7 +15,6 @@ const DesktopLayout = (props) => {
     <>
       <NavMenu 
         items={props.menuItems} 
-        user={props.user} 
         handleSignIn={props.handleSignIn}
         handleSignOut={props.handleSignOut}
       />
@@ -32,7 +31,6 @@ const MobileLayout = (props) => {
     <>
       <NavSidebar 
         items={props.menuItems} 
-        user={props.user}
         handleSignIn={props.handleSignIn}
         handleSignOut={props.handleSignOut}
       >
@@ -51,7 +49,6 @@ export default function ResponsiveLayout(props){
       <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth}>
         <MobileLayout 
           menuItems={props.menuItems} 
-          user={props.user}
           handleSignIn={props.handleSignIn}
           handleSignOut={props.handleSignOut}
         >
@@ -62,7 +59,6 @@ export default function ResponsiveLayout(props){
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
         <DesktopLayout 
           menuItems={props.menuItems} 
-          user={props.user}
           handleSignIn={props.handleSignIn}
           handleSignOut={props.handleSignOut}
         >

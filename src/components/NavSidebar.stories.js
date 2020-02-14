@@ -3,6 +3,7 @@ import {storiesOf} from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import {Header, Image} from 'semantic-ui-react';
 import NavSidebar from './NavSidebar';
+import {userContext} from '../userContext';
 
 export const items = [
     {content: 'Home', to: '/home'},
@@ -30,6 +31,14 @@ storiesOf('NavSidebar', module)
       </NavSidebar>
     )
   })
+
+storiesOf('NavSidebar', module)
+  .addDecorator(StoryRouter())
+  .addDecorator((story) => (
+    <userContext.Provider value={user}>
+      {story()}
+    </userContext.Provider>
+  ))
   .add('logged in', () => {
     return (
       <NavSidebar items={items} user={user}>
