@@ -1,0 +1,55 @@
+type Language @model 
+@auth(
+  rules: [
+    {allow: public, operations: [read], provider: iam},
+    {allow: groups, groups: ["SuperAdmins", "Admins"]}
+  ]
+)
+{
+  id: ID!
+  name: String!
+  litdevices: [LitDevice] @connection(name: "LanguageLitDevices")
+}
+
+type LitDevice @model 
+@auth(
+  rules: [
+    {allow: public, operations: [read], provider: iam},
+    {allow: groups, groups: ["SuperAdmins", "Admins"]}
+  ]
+)
+{
+  id: ID!
+  title: String!
+  language: Language @connection(name: "LanguageLitDevices")
+  entries: [Entry] @connection(name: "LitDeviceEntries")
+  drafts: [Draft] @connection(name: "LitDeviceDrafts")
+}
+
+type Entry @model 
+@auth(
+  rules: [
+    {allow: public, operations: [read], provider: iam},
+    {allow: groups, groups: ["SuperAdmins", "Admins", "Editors"]}
+  ]
+)
+{
+  id: ID!
+  content: String!
+  litdevice: LitDevice @connection(name: "LitDeviceEntries")
+}
+
+type Draft @model 
+@auth(
+  rules: [
+    {allow: owner},
+    {allow: groups, groups: ["SuperAdmins", "Admins", "Editors"],
+    operations: [read, update]
+    }
+  ]
+)
+{
+  id: ID!
+  content: String!
+  litdevice: LitDevice @connection(name: "LitDeviceDrafts")
+}
