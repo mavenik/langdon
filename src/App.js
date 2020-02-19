@@ -51,6 +51,9 @@ function App() {
 
     if(payload.event === 'signIn_failure')
     {alert('Login failed! Please try again.')}
+
+    if(payload.event === 'signOut')
+    {setUser(null);}
   });
 
   return (
