@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Header} from 'semantic-ui-react';
 import './semantic/dist/semantic.css';
 import {
@@ -12,14 +12,12 @@ import {Auth, Hub} from 'aws-amplify';
 
 function App() {
   const [user, setUser] = useState(null);
-  Hub.listen('auth', (data) => {
-    const {payload} = data;
-    console.log(payload);
-    if(payload.event === 'signIn')
-    {
+
+   async function setCurrentUser(){
       Auth.currentAuthenticatedUser()
         .then(user => {
           console.log(user);
+          console.log(user.signInUserSession.accessToken.payload["cognito:groups"]);
           var profilePictureUrl;
           if(user.attributes.identities){
             const identity = JSON.parse(user.attributes.identities)[0];
@@ -37,10 +35,25 @@ function App() {
           setUser({profilePictureUrl: profilePictureUrl, autheticatedUser: user});
         }) // then
         .catch(err => console.log(err))
+   }
+
+  useEffect(() =>{
+    setCurrentUser();
+  }, []);
+
+  Hub.listen('auth', (data) => {
+    const {payload} = data;
+    console.log(payload);
+    if(payload.event === 'signIn')
+    {
+      setCurrentUser();
     } // if
 
     if(payload.event === 'signIn_failure')
     {alert('Login failed! Please try again.')}
+
+    if(payload.event === 'signOut')
+    {setUser(null);}
   });
 
   return (
