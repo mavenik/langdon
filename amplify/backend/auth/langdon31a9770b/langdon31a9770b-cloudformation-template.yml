@@ -109,10 +109,7 @@ Parameters:
               
   dependsOn:
     Type: CommaDelimitedList
-      
-  hostedUIProviderCreds:
-    Type: String
-                
+        
   thirdPartyAuth:
     Type: String
                     
@@ -125,9 +122,15 @@ Parameters:
   adminQueries:
     Type: String
             
+  hostedUIProviderCreds:
+    Type: String
+              
   oAuthMetadata:
     Type: String
-                        
+              
+  adminQueryGroup:
+    Type: String
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 
