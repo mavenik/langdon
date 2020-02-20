@@ -30,7 +30,7 @@ export default function NavSidebar(props) {
               if(user)
               {
                 return <Menu.Item as={Link} position='right' to="#">
-                  <Image src={props.user.profilePictureUrl} avatar/>
+                  <Image src={user.profilePictureUrl} avatar/>
                 </Menu.Item>
 
               } else {
