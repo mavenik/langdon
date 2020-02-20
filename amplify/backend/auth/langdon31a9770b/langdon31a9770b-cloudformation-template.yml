@@ -127,10 +127,7 @@ Parameters:
               
   oAuthMetadata:
     Type: String
-              
-  adminQueryGroup:
-    Type: String
-            
+                        
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 

@@ -68,6 +68,5 @@
     "authProviders": [],
     "userPoolGroups": false,
     "adminQueries": false,
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
-    "adminQueryGroup": "SuperAdmins"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://develop.drhm0o310uh29.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://develop.drhm0o310uh29.amplifyapp.com/\"]}"
 }
